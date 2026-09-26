@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
                 'view.compiled' => $viewsDir,
                 'session.driver' => 'cookie',
                 'cache.default' => 'array',
+                'app.maintenance.driver' => 'file',
             ]);
         }
 
