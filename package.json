@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build && node -e \"const fs=require('fs'); if(!fs.existsSync('dist')) fs.mkdirSync('dist', {recursive:true}); fs.cpSync('public', 'dist', {recursive:true});\"",
+        "build": "vite build && node -e \"const fs=require('fs'); if(!fs.existsSync('dist')) fs.mkdirSync('dist', {recursive:true}); if(fs.existsSync('public/build')) fs.cpSync('public/build', 'dist/build', {recursive:true}); if(fs.existsSync('public/favicon.ico')) fs.copyFileSync('public/favicon.ico', 'dist/favicon.ico'); if(fs.existsSync('public/robots.txt')) fs.copyFileSync('public/robots.txt', 'dist/robots.txt'); if(fs.existsSync('dist/index.php')) fs.unlinkSync('dist/index.php');\"",
         "dev": "vite"
     },
     "devDependencies": {
