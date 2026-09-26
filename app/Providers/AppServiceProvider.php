@@ -24,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
         // Auto-initialize SQLite database on serverless / Vercel environments if tables are missing
         if (config('database.default') === 'sqlite') {
             try {
+                $tmpDb = '/tmp/database.sqlite';
+                if (file_exists($tmpDb)) {
+                    config(['database.connections.sqlite.database' => $tmpDb]);
+                }
+
                 if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
                     \Illuminate\Support\Facades\Artisan::call('migrate --force');
                     \Illuminate\Support\Facades\Artisan::call('db:seed --force');
