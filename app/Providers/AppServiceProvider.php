@@ -21,6 +21,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Ensure writable paths and serverless-safe drivers on Vercel
+        if (isset($_SERVER['VERCEL']) || getenv('VERCEL') || file_exists('/tmp')) {
+            $viewsDir = '/tmp/storage/framework/views';
+            if (!is_dir($viewsDir)) {
+                @mkdir($viewsDir, 0755, true);
+            }
+            config([
+                'view.compiled' => $viewsDir,
+                'session.driver' => 'cookie',
+                'cache.default' => 'array',
+            ]);
+        }
+
         // Auto-initialize SQLite database on serverless / Vercel environments if tables are missing
         if (config('database.default') === 'sqlite') {
             try {
