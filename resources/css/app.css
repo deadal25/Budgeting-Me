@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   THEME STYLES - BUDGETING-ME
+   Guarantees 100% text visibility & high contrast in both Light & Dark modes
+   ========================================================================== */
+
+/* Smooth Transitions for Theme Toggle */
+body, nav, header, footer,
+.account-card, .glass-card,
+table, input, select, textarea {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT MODE RULES (html.light or default without .dark)
+   -------------------------------------------------------------------------- */
+html.light {
+    color-scheme: light;
+}
+
+html.light body {
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* Landing Page in Light Mode */
+html.light .landing-hero-bg {
+    background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.08), transparent 50%),
+                radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.06), transparent 50%),
+                #f8fafc !important;
+}
+
+html.light .landing-header {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light .landing-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light .landing-text-main {
+    color: #0f172a !important;
+}
+
+html.light .landing-text-muted {
+    color: #475569 !important;
+}
+
+html.light .landing-section-alt {
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+}
+
+html.light .landing-footer {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+/* Guest / Auth Box in Light Mode */
+html.light .auth-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .auth-heading {
+    color: #0f172a !important;
+}
+
+html.light .auth-subtext {
+    color: #64748b !important;
+}
+
+html.light .auth-label {
+    color: #334155 !important;
+}
+
+html.light .auth-input {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+html.light .auth-demo-box {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   DARK MODE RULES (html.dark)
+   -------------------------------------------------------------------------- */
+html.dark {
+    color-scheme: dark;
+}
+
+html.dark body {
+    background-color: #0b1120 !important;
+    color: #f8fafc !important;
+}
+
+/* Layout Elements */
+html.dark nav {
+    background-color: #0f172a !important;
+    border-color: #1e293b !important;
+}
+
+html.dark header {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    border-color: #1e293b !important;
+}
+
+html.dark footer {
+    background-color: #0b1120 !important;
+    border-color: #1e293b !important;
+    color: #94a3b8 !important;
+}
+
+/* Card Surfaces in Dark Mode */
+html.dark .bg-white {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+html.dark .bg-slate-50 {
+    background-color: #0f172a !important;
+    border-color: #1e293b !important;
+}
+
+html.dark .bg-slate-100 {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+}
+
+html.dark .bg-gray-50 {
+    background-color: #0f172a !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-100,
+html.dark .border-gray-200,
+html.dark .border-gray-100 {
+    border-color: #334155 !important;
+}
+
+/* High Contrast Text in Dark Mode - GUARANTEE ALL TEXT VISIBLE */
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+    color: #f8fafc !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-gray-700 {
+    color: #f1f5f9 !important;
+}
+
+html.dark .text-slate-600,
+html.dark .text-gray-600 {
+    color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-gray-500 {
+    color: #94a3b8 !important;
+}
+
+html.dark .text-slate-400,
+html.dark .text-gray-400 {
+    color: #94a3b8 !important;
+}
+
+/* Form Controls in Dark Mode */
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="password"],
+html.dark input[type="number"],
+html.dark input[type="date"],
+html.dark select,
+html.dark textarea {
+    background-color: #0f172a !important;
+    border-color: #475569 !important;
+    color: #f8fafc !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+    color: #64748b !important;
+}
+
+html.dark select option {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* Tables in Dark Mode */
+html.dark table thead tr {
+    background-color: #0f172a !important;
+    border-color: #334155 !important;
+}
+
+html.dark table th {
+    color: #cbd5e1 !important;
+    border-color: #334155 !important;
+}
+
+html.dark table td {
+    color: #f1f5f9 !important;
+    border-color: #1e293b !important;
+}
+
+html.dark table tbody tr:hover {
+    background-color: rgba(51, 65, 85, 0.35) !important;
+}
+
+html.dark table .divide-y > * {
+    border-color: #1e293b !important;
+}
+
+/* Hover States */
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-gray-100:hover {
+    background-color: #334155 !important;
+}
+
+/* Dropdown & Modals */
+html.dark .ring-1.ring-black.ring-opacity-5,
+html.dark [role="dialog"],
+html.dark .modal-content {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+/* Badges & Alert Boxes in Dark Mode */
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-100 {
+    background-color: rgba(6, 78, 59, 0.45) !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+}
+html.dark .text-emerald-800,
+html.dark .text-emerald-700 {
+    color: #6ee7b7 !important;
+}
+
+html.dark .bg-rose-50,
+html.dark .bg-rose-100 {
+    background-color: rgba(136, 19, 55, 0.45) !important;
+    border-color: rgba(244, 63, 94, 0.4) !important;
+}
+html.dark .text-rose-800,
+html.dark .text-rose-700 {
+    color: #fda4af !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-100 {
+    background-color: rgba(120, 53, 15, 0.45) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+}
+html.dark .text-amber-800,
+html.dark .text-amber-700 {
+    color: #fcd34d !important;
+}
+
+html.dark .bg-teal-50,
+html.dark .bg-teal-100 {
+    background-color: rgba(19, 78, 74, 0.45) !important;
+    border-color: rgba(20, 184, 166, 0.4) !important;
+}
+html.dark .text-teal-800,
+html.dark .text-teal-700 {
+    color: #5eead4 !important;
+}
+
+html.dark .bg-purple-50,
+html.dark .bg-purple-100 {
+    background-color: rgba(88, 28, 135, 0.45) !important;
+    border-color: rgba(168, 85, 247, 0.4) !important;
+}
+html.dark .text-purple-800,
+html.dark .text-purple-700 {
+    color: #d8b4fe !important;
+}
+
+/* Secondary Button Inversion in Dark Mode */
+html.dark a.bg-white,
+html.dark button.bg-white {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+}
+html.dark a.bg-white:hover,
+html.dark button.bg-white:hover {
+    background-color: #334155 !important;
+}
+
+/* Account Cards in Dark Mode */
+html.dark .account-card {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+}
+html.dark .account-card .text-slate-900 {
+    color: #f8fafc !important;
+}
+html.dark .account-tab-btn.bg-white {
+    background-color: #0f172a !important;
+    color: #34d399 !important;
+}
+
+/* Custom Scrollbar */
+html.dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+html.dark ::-webkit-scrollbar-track {
+    background: #0b1120;
+}
+html.dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
