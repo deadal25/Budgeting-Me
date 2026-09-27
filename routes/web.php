@@ -34,8 +34,20 @@ Route::get('/debug-db', function () {
             $rawBcryptError = $th2->getMessage();
         }
 
+        $manualHash = null;
+        $manualError = null;
+        try {
+            $hasher = new \Illuminate\Hashing\BcryptHasher(['rounds' => 10]);
+            $manualHash = $hasher->make('password');
+        } catch (\Throwable $th3) {
+            $manualError = $th3->getMessage();
+        }
+
         return response()->json([
             'status' => 'ok',
+            'hashing_config' => config('hashing'),
+            'manual_hasher_test' => $manualHash,
+            'manual_hasher_error' => $manualError,
             'password_algos' => function_exists('password_algos') ? password_algos() : [],
             'raw_bcrypt_test' => $rawBcrypt,
             'raw_bcrypt_error' => $rawBcryptError,
