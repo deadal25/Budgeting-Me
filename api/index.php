@@ -44,15 +44,16 @@ if ($dbConnection === 'sqlite') {
     $defaultSqlite = __DIR__ . '/../database/database.sqlite';
     $tmpSqlite = '/tmp/database.sqlite';
 
-    if (!file_exists($tmpSqlite) || filesize($tmpSqlite) === 0) {
-        if (file_exists($defaultSqlite) && filesize($defaultSqlite) > 0) {
+    if (file_exists($defaultSqlite) && filesize($defaultSqlite) > 0) {
+        if (!file_exists($tmpSqlite) || filesize($tmpSqlite) < filesize($defaultSqlite)) {
             @copy($defaultSqlite, $tmpSqlite);
-        } else if (!file_exists($tmpSqlite)) {
-            @touch($tmpSqlite);
         }
+    } else if (!file_exists($tmpSqlite)) {
+        @touch($tmpSqlite);
     }
 
     if (file_exists($tmpSqlite)) {
+        @chmod($tmpSqlite, 0666);
         $_ENV['DB_DATABASE'] = $tmpSqlite;
         $_SERVER['DB_DATABASE'] = $tmpSqlite;
         putenv("DB_DATABASE={$tmpSqlite}");

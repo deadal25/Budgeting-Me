@@ -39,8 +39,16 @@ class AppServiceProvider extends ServiceProvider
         if (config('database.default') === 'sqlite') {
             try {
                 $tmpDb = '/tmp/database.sqlite';
+                $defaultSqlite = database_path('database.sqlite');
+                if (file_exists($defaultSqlite) && filesize($defaultSqlite) > 0) {
+                    if (!file_exists($tmpDb) || filesize($tmpDb) < filesize($defaultSqlite)) {
+                        @copy($defaultSqlite, $tmpDb);
+                    }
+                }
                 if (file_exists($tmpDb)) {
+                    @chmod($tmpDb, 0666);
                     config(['database.connections.sqlite.database' => $tmpDb]);
+                    \Illuminate\Support\Facades\DB::purge('sqlite');
                 }
 
                 if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
