@@ -17,8 +17,30 @@ Route::get('/debug-db', function () {
         $dbSize = $dbExists ? filesize($dbPath) : 0;
         $usersCount = \App\Models\User::count();
         $admin = \App\Models\User::where('email', 'alqad.ri2505@gmail.com')->first();
+        
+        $hashTest = null;
+        $hashError = null;
+        try {
+            $hashTest = \Illuminate\Support\Facades\Hash::make('password');
+        } catch (\Throwable $th) {
+            $hashError = $th->getMessage() . ' in ' . $th->getFile() . ':' . $th->getLine();
+        }
+
+        $rawBcrypt = null;
+        $rawBcryptError = null;
+        try {
+            $rawBcrypt = password_hash('password', PASSWORD_BCRYPT, ['cost' => 10]);
+        } catch (\Throwable $th2) {
+            $rawBcryptError = $th2->getMessage();
+        }
+
         return response()->json([
             'status' => 'ok',
+            'password_algos' => function_exists('password_algos') ? password_algos() : [],
+            'raw_bcrypt_test' => $rawBcrypt,
+            'raw_bcrypt_error' => $rawBcryptError,
+            'hash_test' => $hashTest,
+            'hash_error' => $hashError,
             'db_path' => $dbPath,
             'db_exists' => $dbExists,
             'db_size' => $dbSize,
