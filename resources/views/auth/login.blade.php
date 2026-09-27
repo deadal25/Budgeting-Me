@@ -7,15 +7,8 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <!-- Quick Credentials Selector -->
-    <div class="mb-6 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/80 text-xs space-y-2">
-        <button 
-            type="button" 
-            onclick="fillLogin('alqad.ri2505@gmail.com', 'password')"
-            class="w-full py-2 px-3 rounded-xl bg-indigo-500/15 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 hover:bg-indigo-500/25 border border-indigo-500/30 font-bold text-xs transition flex items-center justify-center gap-2"
-        >
-            <span>👑 1-Klik Masuk Akun Admin (Alqadri)</span>
-        </button>
+    <!-- Demo Credentials Quick Selector -->
+    <div class="mb-6 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/80 text-xs text-center">
         <button 
             type="button" 
             onclick="fillLogin('user@budgetingme.com', 'password')"
