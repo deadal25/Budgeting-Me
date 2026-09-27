@@ -23,6 +23,8 @@ $_ENV['LARAVEL_STORAGE_PATH'] = $tmpStorage;
 $_SERVER['LARAVEL_STORAGE_PATH'] = $tmpStorage;
 putenv("LARAVEL_STORAGE_PATH={$tmpStorage}");
 
+@unlink('/tmp/bootstrap/cache/config.php');
+
 $_ENV['APP_CONFIG_CACHE'] = '/tmp/bootstrap/cache/config.php';
 $_ENV['APP_SERVICES_CACHE'] = '/tmp/bootstrap/cache/services.php';
 $_ENV['APP_PACKAGES_CACHE'] = '/tmp/bootstrap/cache/packages.php';

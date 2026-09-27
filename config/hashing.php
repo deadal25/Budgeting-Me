@@ -1,5 +1,10 @@
 <?php
 
+$rounds = (int) (env('BCRYPT_ROUNDS') ?: 12);
+if ($rounds < 4 || $rounds > 31) {
+    $rounds = 12;
+}
+
 return [
 
     /*
@@ -20,7 +25,7 @@ return [
     */
 
     'bcrypt' => [
-        'rounds' => (int) env('BCRYPT_ROUNDS', 10),
+        'rounds' => $rounds,
         'verify' => env('HASH_VERIFY', false),
     ],
 

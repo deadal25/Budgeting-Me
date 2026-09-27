@@ -32,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
                 'session.driver' => 'cookie',
                 'cache.default' => 'array',
                 'app.maintenance.driver' => 'file',
+                'hashing.driver' => 'bcrypt',
+                'hashing.bcrypt.rounds' => 12,
+                'hashing.rehash_on_login' => false,
             ]);
         }
 
