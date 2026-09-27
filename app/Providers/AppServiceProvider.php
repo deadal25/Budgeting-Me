@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             ]);
         }
 
-        // Auto-initialize SQLite database on serverless / Vercel environments if tables are missing
+        // Auto-initialize SQLite database and ensure users exist on serverless / Vercel environments
         if (config('database.default') === 'sqlite') {
             try {
                 $tmpDb = '/tmp/database.sqlite';
@@ -45,10 +45,43 @@ class AppServiceProvider extends ServiceProvider
 
                 if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
                     \Illuminate\Support\Facades\Artisan::call('migrate --force');
-                    \Illuminate\Support\Facades\Artisan::call('db:seed --force');
+                }
+
+                // 1. Ensure Admin Account (Alqadri - with and without dot) always exists and has admin role
+                $adminEmails = ['alqad.ri2505@gmail.com', 'alqadri2505@gmail.com'];
+                foreach ($adminEmails as $adminEmail) {
+                    $admin = \App\Models\User::firstOrNew(['email' => $adminEmail]);
+                    if (!$admin->exists) {
+                        $admin->name = 'Alqadri (Admin)';
+                        $admin->password = \Illuminate\Support\Facades\Hash::make('password');
+                        $admin->role = 'admin';
+                        $admin->email_verified_at = now();
+                        $admin->save();
+                    } else {
+                        // Ensure it has admin role
+                        if ($admin->role !== 'admin') {
+                            $admin->role = 'admin';
+                            $admin->save();
+                        }
+                    }
+                }
+
+                // 2. Ensure Demo User (Budi Santoso) exists
+                $demoUser = \App\Models\User::firstOrNew(['email' => 'user@budgetingme.com']);
+                if (!$demoUser->exists || !\Illuminate\Support\Facades\Hash::check('password', $demoUser->password)) {
+                    $demoUser->name = 'Budi Santoso';
+                    $demoUser->password = \Illuminate\Support\Facades\Hash::make('password');
+                    $demoUser->role = 'user';
+                    $demoUser->email_verified_at = now();
+                    $demoUser->save();
+                }
+
+                // 3. Ensure Categories are seeded if empty
+                if (\Illuminate\Support\Facades\Schema::hasTable('categories') && \App\Models\Category::count() === 0) {
+                    \Illuminate\Support\Facades\Artisan::call('db:seed --class=CategorySeeder --force');
                 }
             } catch (\Throwable $e) {
-                // Ignore during early migrations or test setups
+                \Illuminate\Support\Facades\Log::error('Auto DB init error: ' . $e->getMessage());
             }
         }
 

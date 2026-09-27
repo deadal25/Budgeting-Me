@@ -44,10 +44,10 @@ if ($dbConnection === 'sqlite') {
     $defaultSqlite = __DIR__ . '/../database/database.sqlite';
     $tmpSqlite = '/tmp/database.sqlite';
 
-    if (!file_exists($tmpSqlite)) {
+    if (!file_exists($tmpSqlite) || filesize($tmpSqlite) === 0) {
         if (file_exists($defaultSqlite) && filesize($defaultSqlite) > 0) {
             @copy($defaultSqlite, $tmpSqlite);
-        } else {
+        } else if (!file_exists($tmpSqlite)) {
             @touch($tmpSqlite);
         }
     }

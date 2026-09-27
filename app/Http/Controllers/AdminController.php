@@ -156,7 +156,8 @@ class AdminController extends Controller
     public function updateUserPassword(Request $request, User $user): RedirectResponse
     {
         // Prevent modifying main admin if caller isn't that admin
-        if ($user->email === 'alqad.ri2505@gmail.com' && auth()->user()->email !== 'alqad.ri2505@gmail.com') {
+        $mainAdmins = ['alqad.ri2505@gmail.com', 'alqadri2505@gmail.com'];
+        if (in_array($user->email, $mainAdmins) && !in_array(auth()->user()->email, $mainAdmins)) {
             return redirect()->back()->with('error', 'Hanya administrator utama yang dapat mengubah kata sandi akun ini.');
         }
 
@@ -205,7 +206,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
         }
 
-        if ($user->isAdmin() || $user->email === 'alqad.ri2505@gmail.com') {
+        if ($user->isAdmin() || in_array($user->email, ['alqad.ri2505@gmail.com', 'alqadri2505@gmail.com'])) {
             return redirect()->back()->with('error', 'Akun Administrator tidak dapat dihapus.');
         }
 

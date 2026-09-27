@@ -21,8 +21,17 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
 
         // 2. Seed Admin user (Alqadri)
-        $admin = User::firstOrCreate(
+        User::firstOrCreate(
             ['email' => 'alqad.ri2505@gmail.com'],
+            [
+                'name' => 'Alqadri (Admin)',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'email_verified_at' => now(),
+            ]
+        );
+        User::firstOrCreate(
+            ['email' => 'alqadri2505@gmail.com'],
             [
                 'name' => 'Alqadri (Admin)',
                 'password' => Hash::make('password'),

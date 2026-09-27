@@ -40,7 +40,7 @@
                 </form>
 
                 <!-- Hapus Akun Form -->
-                @if($user->id !== auth()->id() && !$user->isAdmin() && $user->email !== 'alqad.ri2505@gmail.com')
+                @if($user->id !== auth()->id() && !$user->isAdmin() && !in_array($user->email, ['alqad.ri2505@gmail.com', 'alqadri2505@gmail.com']))
                     <form 
                         method="POST" 
                         action="{{ route('admin.users.destroy', $user->id) }}" 

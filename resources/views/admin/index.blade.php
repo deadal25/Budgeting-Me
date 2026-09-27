@@ -220,7 +220,7 @@
                                         </form>
 
                                         <!-- Hapus Pengguna (Protected) -->
-                                        @if($usr->id !== auth()->id() && !$usr->isAdmin() && $usr->email !== 'alqad.ri2505@gmail.com')
+                                        @if($usr->id !== auth()->id() && !$usr->isAdmin() && !in_array($usr->email, ['alqad.ri2505@gmail.com', 'alqadri2505@gmail.com']))
                                             <form 
                                                 method="POST" 
                                                 action="{{ route('admin.users.destroy', $usr->id) }}" 
